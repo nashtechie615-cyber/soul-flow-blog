@@ -1,0 +1,51 @@
+---
+import { SHOP_URL } from '../consts';
+
+const navLinks: { label: string; href: string }[] = [
+  { label: 'Shop',       href: `${SHOP_URL}/collections/all` },
+  { label: 'Kimonos',    href: `${SHOP_URL}/collections/kimonos` },
+  { label: 'Dresses',    href: `${SHOP_URL}/collections/dresses` },
+  { label: 'Jewelry',    href: `${SHOP_URL}/collections/necklaces` },
+  { label: 'Sale',       href: `${SHOP_URL}/collections/sale` },
+  { label: 'Journal',    href: '/blog/' },
+];
+---
+
+<header class="sticky top-0 z-40 bg-ivory/90 backdrop-blur border-b border-sand">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 md:h-20 items-center justify-between gap-4">
+      <a href={SHOP_URL} class="flex items-center gap-2 shrink-0">
+        <span class="font-display text-xl md:text-2xl tracking-wide text-ink">Soul Flow <span class="italic text-clay">Apparel</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7" aria-label="Primary">
+        {navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-sm uppercase tracking-[0.18em] text-ink-soft hover:text-clay transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <a
+        href={SHOP_URL}
+        class="hidden sm:inline-flex items-center gap-2 rounded-full bg-clay px-5 py-2 text-sm font-semibold text-white hover:bg-clay-dark transition-colors"
+      >
+        Shop Now
+      </a>
+    </div>
+
+    <nav class="md:hidden flex items-center gap-5 overflow-x-auto whitespace-nowrap pb-3" aria-label="Primary mobile">
+      {navLinks.map(({ label, href }) => (
+        <a
+          href={href}
+          class="text-xs uppercase tracking-[0.18em] text-ink-soft hover:text-clay"
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

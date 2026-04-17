@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+import { SITE_TITLE } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const {
+  title,
+  description,
+  image = 'https://soulflowshop.com/cdn/shop/files/Soul_Flow_Logo_BLACK_LETTERS_300_x_150_px_226_x_98_px.png?height=628&pad_color=ffffff&v=1744722493&width=1200',
+} = Astro.props;
+const fullTitle = title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/png" href="https://soulflowshop.com/cdn/shop/files/StoreFav2.png?crop=center&height=32&v=1744060864&width=32" />
+<link rel="canonical" href={canonicalURL} />
+<link rel="preconnect" href="https://soulflowshop.com" crossorigin />
+
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Soul Flow Apparel" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />

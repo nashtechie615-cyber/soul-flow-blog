@@ -1,0 +1,9 @@
+{
+  "wp_site": "https://vettedview.com",
+  "wp_user": "YOUR_WP_USERNAME",
+  "wp_app_password": "YOUR_WP_APPLICATION_PASSWORD",
+  "wp_category_name": "Fashion",
+  "astro_project_dir": "C:\\path\\to\\soul-flow",
+  "blog_content_dir": "C:\\path\\to\\soul-flow\\src\\content\\blog",
+  "shop_url": "https://soulflowshop.com"
+}
