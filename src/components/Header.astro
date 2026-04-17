@@ -1,13 +1,14 @@
 ---
 import { SHOP_URL } from '../consts';
 
+const base = import.meta.env.BASE_URL;
 const navLinks: { label: string; href: string }[] = [
   { label: 'Shop',       href: `${SHOP_URL}/collections/all` },
   { label: 'Kimonos',    href: `${SHOP_URL}/collections/kimonos` },
   { label: 'Dresses',    href: `${SHOP_URL}/collections/dresses` },
   { label: 'Jewelry',    href: `${SHOP_URL}/collections/necklaces` },
   { label: 'Sale',       href: `${SHOP_URL}/collections/sale` },
-  { label: 'Journal',    href: '/blog/' },
+  { label: 'Journal',    href: `${base}blog/` },
 ];
 ---
 

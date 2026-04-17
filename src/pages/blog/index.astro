@@ -11,6 +11,7 @@ const posts = (await getCollection('blog')).sort(
 );
 
 const [featured, ...rest] = posts;
+const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -40,7 +41,7 @@ const [featured, ...rest] = posts;
 
       {featured && (
         <section class="mx-auto max-w-7xl px-4 md:px-8 pt-12">
-          <a href={`/blog/${featured.id}/`} class="group grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <a href={`${base}blog/${featured.id}/`} class="group grid md:grid-cols-2 gap-6 md:gap-10 items-center">
             {featured.data.heroImage && (
               <div class="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
@@ -68,7 +69,7 @@ const [featured, ...rest] = posts;
       <section class="mx-auto max-w-7xl px-4 md:px-8 py-16">
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {rest.map((post) => (
-            <a href={`/blog/${post.id}/`} class="group block">
+            <a href={`${base}blog/${post.id}/`} class="group block">
               {post.data.heroImage && (
                 <div class="aspect-[4/5] overflow-hidden rounded-xl bg-sand">
                   <img

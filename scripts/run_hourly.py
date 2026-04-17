@@ -258,6 +258,37 @@ def main() -> int:
     if proc.returncode != 0:
         return proc.returncode
 
+    # Commit + push the new post to GitHub so the Astro site (GitHub Pages) rebuilds.
+    project_dir = Path(cfg["astro_project_dir"])
+    log("Committing and pushing new post to GitHub...")
+    try:
+        rel = target.relative_to(project_dir)
+    except ValueError:
+        rel = target
+    for label, cmd in [
+        ("git add", ["git", "add", str(rel)]),
+        ("git commit", ["git", "commit", "-m", f"Add hourly post: {target.name}"]),
+        ("git push", ["git", "push", "origin", "main"]),
+    ]:
+        p = subprocess.run(
+            cmd,
+            cwd=str(project_dir),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=60,
+        )
+        out = p.stdout.decode("utf-8", errors="replace").strip()
+        log(f"  {label} rc={p.returncode}")
+        if out:
+            for line in out.splitlines()[:6]:
+                log(f"     {line}")
+        if p.returncode != 0 and label == "git commit" and "nothing to commit" in out.lower():
+            log("  (nothing to commit; continuing)")
+            break
+        if p.returncode != 0:
+            log(f"!! {label} failed — WordPress post already succeeded; site just won't auto-rebuild this hour.")
+            break
+
     log(f"=== Soul Flow hourly run complete: {stamp} ===")
     return 0
 
